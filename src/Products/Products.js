@@ -3,47 +3,10 @@ import Card from '../UI/Card/Card'
 import CartElement from '../UI/CartElement/CartElement';
 import '../index.css'
 
+// TODO: replace with Firebase and useEffect hook
+import data from '../data/data'
 
 const Cart = () => {
-
-  const data = [
-    {
-      id: 1,
-      name: "Eggs",
-      image: "https://d17zv3ray5yxvp.cloudfront.net/variants/W1ymDizfe679XsfX9uP8A5bU/7b27a910a7194c812eacf34700e38dcab3abed02f30837d1dad313c5651bb5fa",
-      price: 100,
-    },
-    {
-      id: 2,
-      name: "Milk",
-      image: "https://d17zv3ray5yxvp.cloudfront.net/variants/b1qEMnNGbwiwV5cWysofPoqz/7b27a910a7194c812eacf34700e38dcab3abed02f30837d1dad313c5651bb5fa",
-      price: 20,
-    },
-    {
-      id: 3,
-      name: "Cheese",
-      image: "https://d17zv3ray5yxvp.cloudfront.net/variants/1avpwnxKAEqEpTf1k3VCbBbg/7b27a910a7194c812eacf34700e38dcab3abed02f30837d1dad313c5651bb5fa",
-      price: 50,
-    },
-    {
-      id: 4,
-      name: "Chocolate",
-      image: "https://d17zv3ray5yxvp.cloudfront.net/variants/A6V76f1zeu3NWkf5seBERe6c/7b27a910a7194c812eacf34700e38dcab3abed02f30837d1dad313c5651bb5fa",
-      price: 20,
-    },
-    {
-      id: 5,
-      name: "Yougurt",
-      image: "https://d17zv3ray5yxvp.cloudfront.net/variants/DW7VY421uYHJLnNgCUEMYYqH/7b27a910a7194c812eacf34700e38dcab3abed02f30837d1dad313c5651bb5fa",
-      price: 20,
-    },
-    {
-      id: 6,
-      name: "Cottage cheese",
-      image: "https://d17zv3ray5yxvp.cloudfront.net/variants/3DA8n1qQnuziMNBQjZCH2XKB/7b27a910a7194c812eacf34700e38dcab3abed02f30837d1dad313c5651bb5fa",
-      price: 20,
-    },
-  ]
 
   const [cart, updateCart] = useState([]);
 
