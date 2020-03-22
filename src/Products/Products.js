@@ -70,7 +70,7 @@ const Cart = () => {
   return (
     <React.Fragment>
       <div className='layout-products'>
-        <h1>Grocerries</h1>
+        <h1>Groceries</h1>
         {catalogue.length > 0 ? catalogueRender : spinner}
       </div>
       <div className='layout-cart'>
