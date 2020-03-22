@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../UI/Card/Card'
 import CartElement from '../UI/CartElement/CartElement';
 import '../index.css'
 
-// TODO: replace with Firebase and useEffect hook
-import data from '../data/data'
-
 const Cart = () => {
 
   const [cart, updateCart] = useState([]);
+  const [catalogue, getCatalogue] = useState([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetch('https://5e77a9a9e3fd85001601f9dd.mockapi.io/api/v1/catalogue')
+        .then(response => response.json())
+        .then(responseData => getCatalogue(responseData.data))
+        .catch(err => console.error('Error pulling catalogue', err))
+    }, 1000)
+    return () => { clearTimeout(timer) }
+  }, [])
 
   const onAddProduct = (name, price) => {
     updateCart(existingProducts => {
@@ -43,28 +51,36 @@ const Cart = () => {
     return cart.reduce((accumulator, currentValue) => accumulator + (currentValue.price * currentValue.quantity), 0)
   }
 
+  const catalogueRender = (
+    <section className='products'>
+      {catalogue.map(product =>
+        (
+          <li key={product.id}>
+            <Card image={product.image} name={product.name} price={product.price} addProduct={onAddProduct} />
+          </li>
+        )
+      )}
+    </section>
+  )
+
+  const spinner = (
+    <div className="loader">Loading...</div>
+  )
+
   return (
     <React.Fragment>
       <div className='layout-products'>
         <h1>Grocerries</h1>
-        <section className='products'>
-          {data.map(product =>
-            (
-              <li key={product.id}>
-                <Card image={product.image} name={product.name} price={product.price} addProduct={onAddProduct} />
-              </li>
-            )
-          )}
-        </section>
+        {catalogue.length > 0 ? catalogueRender : spinner}
       </div>
       <div className='layout-cart'>
         <h1>Shopping Cart</h1>
         {cart.map(el => (
-          <li key={el.id}>
+          <li key={el.name}>
             <CartElement price={el.price} name={el.name} quantity={el.quantity} add={onAddProduct} remove={onRemoveProduct} />
           </li>
         ))}
-        {calculateTotalPrice() > 0 ? <h2>Total: {calculateTotalPrice()}</h2> : <p>Cart is empty</p>}
+        {calculateTotalPrice() > 0 ? <h2 className='total'>Total: {calculateTotalPrice()}</h2> : <p>Cart is empty</p>}
       </div>
     </React.Fragment>
   );

@@ -14,7 +14,7 @@ const Card = props => {
       <img src={image} alt={name} width='100%' />
       <div className='card-container'>
         <h3>{name}</h3>
-        <p>{price}</p>
+        <p>Price: {price}</p>
       </div>
     </div>
   );
